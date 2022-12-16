@@ -1,3 +1,11 @@
+# 关于作者
+姓名：Sora
+联系方式：lgy19971027@163.com
+微信：SOH4C4759
+
+# 鸣谢
+@szz1031 提供了Readme.md的修改建议
+
 # 技术栈
 Ureal引擎中Wwise插件Mastering Suite的功能插件
 
