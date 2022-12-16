@@ -1,34 +1,37 @@
-# ÓÃÍ¾
-ÓÃÓÚÊµÊ©ÇĞ»»WwiseÒôÆµ×ÜÏßµÄĞ§¹û
+# æŠ€æœ¯æ ˆ
+Urealå¼•æ“ä¸­Wwiseæ’ä»¶Mastering Suiteçš„åŠŸèƒ½æ’ä»¶
 
-# ÊÊÓÃ·¶Î§
-ÊÊÓÃÓÚËùÓĞÊ¹ÓÃMastering SuiteµÄWwiseÒôÆµ·½°¸
+# ç”¨é€”
+ç”¨äºåœ¨æ¸¸æˆä¸­å®æ—¶åˆ‡æ¢WwiseéŸ³é¢‘æ€»çº¿çš„æ•ˆæœï¼Œå¯ä»¥ç†è§£ä¸ºç½‘æ˜“äº‘çš„â€éŸ³æ•ˆè®¾ç½®â€œ
 
-# ×¼±¸
-[] WwiseÒÑ¼¯³ÉÖÁUnrealÒıÇæ
+# é€‚ç”¨èŒƒå›´
+é€‚ç”¨äºæ‰€æœ‰ä½¿ç”¨Mastering Suiteçš„WwiseéŸ³é¢‘æ–¹æ¡ˆ
 
-[] Wwise¹¤³ÌĞèÒª¾ßÓĞMastering SuiteÈ¨ÏŞ
+# å‡†å¤‡
+[] Wwiseå·²é›†æˆè‡³Unrealå¼•æ“
 
-[] Wwise¹¤³ÌFile_ImportFactoryAsset..._MasteringSuite
+[] Wwiseå·¥ç¨‹éœ€è¦å…·æœ‰Mastering Suiteæƒé™
 
-[] ½«Mastering SuiteÔ¤ÉèµÄWork UnitÏÔÊ½µØµ¼ÈëÖÁSoundBank
+[] Wwiseå·¥ç¨‹File_ImportFactoryAsset..._MasteringSuite å¯¼å…¥åŸå‚é¢„è®¾
 
-[] µã»÷User Setting£¬¹´Ñ¡Éú³ÉÍ·ÎÄ¼ş£¬¼´Wwise_IDS.h,ÓÃÓÚ»ñÈ¡ÒÔÏÂº¯ÊıËùĞèµÄ²ÎÊı
+[] å°†Mastering Suiteé¢„è®¾çš„Work Unitæ˜¾å¼åœ°å¯¼å…¥è‡³SoundBank
 
-  - AudioDevice ¡°System" = 3859886410U(ÈçÃüÃû²»Í¬ÔòĞèÒªÁíĞĞÉú³ÉÉÏÊöÍ·ÎÄ¼ş»ñÈ¡AudioDeviceID£¬»òÊ¹ÓÃ£©
+[] ç‚¹å‡»User Settingï¼Œå‹¾é€‰ç”Ÿæˆå¤´æ–‡ä»¶ï¼Œå³Wwise_IDS.h,ç”¨äºè·å–ä»¥ä¸‹å‡½æ•°æ‰€éœ€çš„å‚æ•°
+
+  - AudioDevice â€œSystem" = 3859886410U(å¦‚å‘½åä¸åŒåˆ™éœ€è¦å¦è¡Œç”Ÿæˆä¸Šè¿°å¤´æ–‡ä»¶è·å–AudioDeviceIDï¼Œæˆ–ä½¿ç”¨ï¼‰
   - Mastering Suite ShareSetID
-    - Off = 930712164U (ÉèÎªDefault Preset£©
+    - Off = 930712164U (è®¾ä¸ºDefault Presetï¼‰
     - TV = 1568083719U
     - HomeCinema = 1568083719U
     - HeadPhones = 880395932U
     - SoundBar = 1396549701U
     - NightMode = 2444352864U
-  - in_uFXIndex¼´Ğ§¹ûÆ÷²å²ÛÏÂ±ê£¬ÒòMastering SuiteÄ¬ÈÏÎ»ÓÚAudioDevice_EffectµÄ×îºóÒ»¸ö²å²Û£¬¼´in_uFXIndex=3
-Ä¿Ç°ËùÓĞ AK::SoundEngine µ÷ÓÃ¾ùÍ¨¹ı AudioDeviceÊµÏÖ£¬ÇÒ±ØĞëÔÚ AkAudioÄ£¿éÄÚÊµÏÖ£¬±ØĞëÔÚAkAudioÄ£¿éÄÚÀ©Õ¹¹¦ÄÜ£¬ÒÔ±ã±©Â¶ËùĞèµÄWwise¹¦ÄÜ¡£
+  - in_uFXIndexå³æ•ˆæœå™¨æ’æ§½ä¸‹æ ‡ï¼Œå› Mastering Suiteé»˜è®¤ä½äºAudioDevice_Effectçš„æœ€åä¸€ä¸ªæ’æ§½ï¼Œå³in_uFXIndex=3
+ç›®å‰æ‰€æœ‰ AK::SoundEngine è°ƒç”¨å‡é€šè¿‡ AudioDeviceå®ç°ï¼Œä¸”å¿…é¡»åœ¨ AkAudioæ¨¡å—å†…å®ç°ï¼Œå¿…é¡»åœ¨AkAudioæ¨¡å—å†…æ‰©å±•åŠŸèƒ½ï¼Œä»¥ä¾¿æš´éœ²æ‰€éœ€çš„WwiseåŠŸèƒ½ã€‚
 
-[] UE C++¹¤³Ì
+[] UE C++å·¥ç¨‹
 
-[] AkAudio.Build.cs£¬167ĞĞºó¼ÓÈë¸ÃĞ§¹ûÆ÷µÄÃû³Æ  "MasteringSuiteFX"¡¾ÈçÏÂ¡¿
+[] AkAudio.Build.csï¼Œ167è¡ŒååŠ å…¥è¯¥æ•ˆæœå™¨çš„åç§°  "MasteringSuiteFX"ã€å¦‚ä¸‹ã€‘
 
     public class AkAudio : ModuleRules
     {
@@ -46,11 +49,11 @@
                     "MasteringSuiteFX",
             };
 
-# Ê¹ÓÃ·½·¨
-    AkAudio.Build.cs Î»ÓÚ%GameProjectName\Plugins\Wwise\Source\AkAudio\AkAudio.Build.cs
+# ä½¿ç”¨æ–¹æ³•
+    AkAudio.Build.cs ä½äº%GameProjectName\Plugins\Wwise\Source\AkAudio\AkAudio.Build.cs
 
-    cppÎÄ¼ş·ÅÖÃµØÖ· %GameProjectName\Plugins\Wwise\Source\AkAudio\Private\SwitchBusFX.cpp
+    cppæ–‡ä»¶æ”¾ç½®åœ°å€ %GameProjectName\Plugins\Wwise\Source\AkAudio\Private\SwitchBusFX.cpp
 
-    headerÎÄ¼ş·ÅÖÃµØÖ· %GameProjectName\Plugins\Wwise\Source\AkAudio\Public\AudioLab.h
+    headeræ–‡ä»¶æ”¾ç½®åœ°å€ %GameProjectName\Plugins\Wwise\Source\AkAudio\Public\AudioLab.h
 
-    ÒÔC++¹¤³ÌÔËĞĞUnreal±à¼­Æ÷£¬±àÒë´úÂëºó£¬¼´¿ÉÔÚÀ¶Í¼Wwise|AudioDeviceÖĞÊ¹ÓÃ¸ÃWwise¹¦ÄÜÀ©Õ¹
+    ä»¥C++å·¥ç¨‹è¿è¡ŒUnrealç¼–è¾‘å™¨ï¼Œç¼–è¯‘ä»£ç åï¼Œå³å¯åœ¨è“å›¾Wwise|AudioDeviceä¸­ä½¿ç”¨è¯¥WwiseåŠŸèƒ½æ‰©å±•
