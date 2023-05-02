@@ -39,7 +39,7 @@ int CurrentPresetIndex = 0;
 void UWwiseExtensions::ChangeAudioDevicePreset()
 {
     const int64 AudioDeviceID = 3859886410; // Default audio device ID
-    const int UserFxIndex = 3; // Default user Fx index
+    const int UserFxIndex = 0; // Default user Fx index
 
     // Check if the game engine is running and log a message
     if (GEngine)
