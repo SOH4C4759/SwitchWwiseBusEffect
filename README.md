@@ -7,7 +7,7 @@
 @szz1031 提供了Readme.md的修改建议
 
 # 技术栈
-Ureal引擎中Wwise插件Mastering Suite的功能插件
+Ureal引擎中Wwise插件Mastering Suite的功能插件扩展
 
 # 用途
 用于在游戏中实时切换Wwise音频总线的效果，可以理解为网易云的”音效设置“
@@ -62,6 +62,6 @@ Ureal引擎中Wwise插件Mastering Suite的功能插件
 
     cpp文件放置地址 %GameProjectName\Plugins\Wwise\Source\AkAudio\Private\SwitchBusFX.cpp
 
-    header文件放置地址 %GameProjectName\Plugins\Wwise\Source\AkAudio\Public\AudioLab.h
+    header文件放置地址 %GameProjectName\Plugins\Wwise\Source\AkAudio\Public\SwitchBusFX.h
 
     以C++工程运行Unreal编辑器，编译代码后，即可在蓝图Wwise|AudioDevice中使用该Wwise功能扩展
