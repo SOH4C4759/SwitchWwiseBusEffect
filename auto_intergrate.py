@@ -1,21 +1,128 @@
-# TODO Á´½ÓWaapi,²»»á2022ÒÔÇ°°æ±¾½øĞĞ¼æÈİ
-# TODO ÊäÈëPerforceÕËºÅ
-# TODO ¼ì²âµ±Ç°Wwise¹¤³ÌÊÇ·ñ°üº¬ MasteringSuite Ô­³§Ô¤Éè
-# TODO Í¨¹ıWaapiÏò¹¤³ÌÖĞÌí¼ÓĞ§¹ûÆ÷ in_uFXIndex¼´Ğ§¹ûÆ÷²å²ÛÏÂ±ê£¬ÒòMastering SuiteÄ¬ÈÏÎ»ÓÚAudioDevice_EffectµÄ×îºóÒ»¸ö²å²Û£¬¼´in_uFXIndex=3
-# TODO ½«MasteringSuite Ô­³§Ô¤ÉèÏÔÊ½µØ¼ÓÈëµ½Init.bnkµÄInclusionÖĞ
-# TODO ×Ô¶¯Éú³ÉInit.bnk,²¢ÇÒÉú³ÉÉú³ÉÍ·ÎÄ¼ş£¬¼´Wwise_IDS.h,ÓÃÓÚ»ñÈ¡ÒÔÏÂº¯ÊıËùĞèµÄ²ÎÊı
-# TODO ¹Ø±ÕWwise¹¤³Ì
-# TODO Á´½ÓPerforce£¬Ç¨³ö¸Ä¶¯ÖÁchangelist
-# TODO Í¨¹ıpython»ñÈ¡µ±Ç°UE¹¤³ÌµÄÂ·¾¶
-# TODO ÑéÖ¤UEÊÇ·ñÓĞWwise¼¯³É
-# TODO »ñÈ¡µ±Ç°ÔËĞĞµØÖ·£¬½«sourceÏÂµÄÎÄ¼ş·Ö±ğ¿½±´ÖÁUE¹¤³ÌÏÂ
-# TODO cppÎÄ¼ş·ÅÖÃµØÖ· %GameProjectName\Plugins\Wwise\Source\AkAudio\Private\
-# TODO headerÎÄ¼ş·ÅÖÃµØÖ· %GameProjectName\Plugins\Wwise\Source\AkAudio\Public\SwitchBusFX.h
-# TODO ±à¼­ÎÄ¼şAkAudio.Build.cs Î»ÓÚ%GameProjectName\Plugins\Wwise\Source\AkAudio\AkAudio.Build.cs
-# TODO Ö´ĞĞUEµÄ´úÂë±àÒë
-# ±à¼­ÄÚÈİÈçÏÂ£º
+# -*- coding: utf-8 -*-
+
+# region Import
+from waapi import connect, CannotConnectToWaapiException
+from P4 import P4, P4Exception
+import sys
+
+# endregion
+
+# region WwiseConnection
+url = None
+try:
+    client = connect(url)
+except CannotConnectToWaapiException as e:
+    print(e)
+    exit()
+# endregion
+
+# region P4 Instances
+p4 = P4()
+# endregion
+
+# region Initialize
+_info_ = client.call("ak.wwise.core.getInfo")
+_projInfo_ = client.call("ak.wwise.core.getProjectInfo")
+
+__console__ = _info_['directories']['bin'] + 'WwiseConsole.exe'
+__wwise_version__ = _info_['version']['year']
+__masteringSuit_factory__ = ['Headphones', 'HomeCinema', 'NightMode', 'Off', 'SoundBar', 'TV']
+
+
+# endregion
+
+# Define Functions
+def check_presets_exist() -> bool:
+    """æ£€æµ‹å½“å‰Wwiseå·¥ç¨‹æ˜¯å¦åŒ…å« MasteringSuite åŸå‚é¢„è®¾"""
+    for i in __masteringSuit_factory__:
+        args = {
+            "waql": f"from type Effect where name = \"{i}\""
+        }
+        res = client.call("ak.wwise.core.object.get", **args)['return']
+
+        print(f"MasteringSuite Presetï¼š{res[0]['name']}")
+
+        if res != []:  # ä¸å¯ç®€åŒ–
+            pass
+        else:
+            print("Mastering Suite å®˜æ–¹é¢„è®¾ä¸å®Œæ•´ï¼Œè¯·é‡æ–°å¯¼å…¥")
+            return False
+    return True
+
+
+def import_p4_args() -> bool:
+    """è¾“å…¥Perforceè´¦å·"""
+    p4.port = input("è¯·è¾“å…¥p4çš„Portï¼š")
+    p4.user = input("è¯·è¾“å…¥p4çš„Userï¼š")
+    p4.client = input("è¯·è¾“å…¥p4çš„Clientï¼š")
+    p4.password = input("è¯·è¾“å…¥p4çš„PassWordï¼š")
+    try:
+        p4.connect()
+        info = p4.run("info")
+        p4.run_sync()  # æ‹‰æ–°
+        print("Perforce è¿æ¥æˆåŠŸ")
+        return True
+    except P4Exception as e:
+        print(e)
+        return False
+
+
+def insert_effect_to_object():
+    """é€šè¿‡Waapiå‘å·¥ç¨‹ä¸­æ·»åŠ æ•ˆæœå™¨ in_uFXIndexå³æ•ˆæœå™¨æ’æ§½ä¸‹æ ‡ï¼Œå› Mastering Suiteé»˜è®¤ä½äºAudioDevice_Effectçš„æœ€åä¸€ä¸ªæ’æ§½ï¼Œin_uFXIndex=3"""
+    args = {
+        "objects": [
+            {
+                "object": "\\Audio Devices\\Default Work Unit\\System",
+                "@Effect3": {
+                    "type": "Effect",
+                    "name": "Off",
+                    "classId": 12189699
+                }
+            }
+        ]
+    }
+    res = client.call("ak.wwise.core.object.set", **args)
+    if res:
+        print(f"æ•ˆæœå™¨MasteringSuiteæ·»åŠ æˆåŠŸ \n {res}")
+        return True
+    else:
+        return False
+
+# endregion
+# TODO å°†MasteringSuite åŸå‚é¢„è®¾æ˜¾å¼åœ°åŠ å…¥åˆ°Init.bnkçš„Inclusionä¸­ # FIXME MasteringSuite No License
+# TODO è‡ªåŠ¨ç”ŸæˆInit.bnk,å¹¶ä¸”ç”Ÿæˆç”Ÿæˆå¤´æ–‡ä»¶ï¼Œå³Wwise_IDS.h,ç”¨äºè·å–ä»¥ä¸‹å‡½æ•°æ‰€éœ€çš„å‚æ•°
+# TODO å…³é—­Wwiseå·¥ç¨‹
+# TODO é“¾æ¥Perforceï¼Œè¿å‡ºæ”¹åŠ¨è‡³changelist
+# TODO é€šè¿‡pythonè·å–å½“å‰UEå·¥ç¨‹çš„è·¯å¾„
+
+"""```python
+import unreal
+
+# è·å–å½“å‰æ´»åŠ¨çš„ç¼–è¾‘å™¨çª—å£
+editor_util = unreal.EditorUtilityLibrary()
+editor_window = editor_util.get_active_editor_window()
+
+# è·å–å½“å‰å·¥ç¨‹çš„è·¯å¾„
+if editor_window:
+    current_world = editor_window.get_current_world()
+    if current_world:
+        project_file_path = current_world.get_map_file_path()
+        project_dir = unreal.Paths.get_path(project_file_path)
+        print("å½“å‰å·¥ç¨‹è·¯å¾„ï¼š", project_dir)
+```
+
+è¿™æ®µä»£ç ä½¿ç”¨äº†`unreal`æ¨¡å—ä¸­çš„`EditorUtilityLibrary`å’Œ`Paths`ç±»æ¥è·å–å½“å‰å·¥ç¨‹çš„è·¯å¾„ã€‚`get_active_editor_window()`å¯ä»¥è·å–å½“å‰æ´»åŠ¨çš„ç¼–è¾‘å™¨çª—å£ï¼Œ`get_current_world()`å¯ä»¥è·å–å½“å‰ç¼–è¾‘å™¨çª—å£ä¸­çš„ä¸–ç•Œï¼Œ`get_map_file_path()`å¯ä»¥è·å–å½“å‰ä¸–ç•Œå¯¹åº”çš„åœ°å›¾æ–‡ä»¶è·¯å¾„ã€‚æœ€åï¼Œä½¿ç”¨`get_path()`æ–¹æ³•ä»åœ°å›¾æ–‡ä»¶è·¯å¾„ä¸­æå–å‡ºå·¥ç¨‹è·¯å¾„ã€‚"""
+
+# TODO éªŒè¯UEæ˜¯å¦æœ‰Wwiseé›†æˆ
+# TODO è·å–å½“å‰è¿è¡Œåœ°å€ï¼Œå°†sourceä¸‹çš„æ–‡ä»¶åˆ†åˆ«æ‹·è´è‡³UEå·¥ç¨‹ä¸‹
+# TODO cppæ–‡ä»¶æ”¾ç½®åœ°å€ %GameProjectName\Plugins\Wwise\Source\AkAudio\Private\
+# TODO headeræ–‡ä»¶æ”¾ç½®åœ°å€ %GameProjectName\Plugins\Wwise\Source\AkAudio\Public\SwitchBusFX.h
+# TODO ç¼–è¾‘æ–‡ä»¶AkAudio.Build.cs ä½äº%GameProjectName\Plugins\Wwise\Source\AkAudio\AkAudio.Build.cs
+# TODO æ‰§è¡ŒUEçš„ä»£ç ç¼–è¯‘
+# TODO æäº¤UEæ”¹åŠ¨è‡³ç‰ˆæœ¬ç®¡ç†
+# ç¼–è¾‘å†…å®¹å¦‚ä¸‹ï¼š
 """
-AkAudio.Build.cs£¬167ĞĞºó¼ÓÈë¸ÃĞ§¹ûÆ÷µÄÃû³Æ  "MasteringSuiteFX"¡¾ÈçÏÂ¡¿
+AkAudio.Build.csï¼Œ167è¡ŒååŠ å…¥è¯¥æ•ˆæœå™¨çš„åç§°  "MasteringSuiteFX"ã€å¦‚ä¸‹ã€‘
 
     public class AkAudio : ModuleRules
     {
@@ -33,4 +140,3 @@ AkAudio.Build.cs£¬167ĞĞºó¼ÓÈë¸ÃĞ§¹ûÆ÷µÄÃû³Æ  "MasteringSuiteFX"¡¾ÈçÏÂ¡¿
                     "MasteringSuiteFX",
             };
 """
-
